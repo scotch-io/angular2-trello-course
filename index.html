@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>ngToDo</title>
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/style.css">
+
+    <!-- JS -->
+    <!-- polyfills -->
+    <script src="node_modules/core-js/client/shim.min.js"></script>
+    <script src="node_modules/zone.js/dist/zone.js"></script>
+    <script src="node_modules/reflect-metadata/Reflect.js"></script>
+    <script src="node_modules/systemjs/dist/system.src.js"></script>
+    
+    <!-- systemjs configuration to load our app -->
+    <script src="systemjs.config.js"></script>
+    <script>
+        System.import('app').catch(function(err){ console.error(err); });
+    </script>
+</head>
+<body>
+
+    <header>
+         <nav class="navbar navbar-default">
+             <a href="/" class="navbar-brand">Do It To It</a>
+             <ul class="nav navbar-nav">
+                 <li><a href="/">Home</a></li>
+                 <li><a href="/about">About</a></li>
+             </ul>
+         </nav>
+     </header> 
+
+    <main>
+    <div class="container">
+        <my-app></my-app>   
+    </div>
+    </main>
+
+    <footer>
+        <nav class="navbar navbar-default">
+        <div class="container">
+            i are footer
+        </div>
+        </nav>
+    </footer>
+    
+</body>
+</html>

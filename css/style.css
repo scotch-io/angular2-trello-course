@@ -1,0 +1,13 @@
+body  {
+  font-size: 16px;
+  line-height: 1.5;
+  background: #0079BF;
+}
+
+.navbar  {
+  border-radius: 0;
+}
+
+main  {
+  min-height: 800px;
+}
