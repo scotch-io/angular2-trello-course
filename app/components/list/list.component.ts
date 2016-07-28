@@ -14,13 +14,13 @@ import { Todo } from '../../shared/interfaces/Todo';
       </div>
 
       <div *ngFor="let todo of list.todos">
-        <my-todo [list]="list" [todo]="todo"></my-todo>
+        <my-todo [todo]="todo"></my-todo>
       </div>
 
       <div class="new-todo-form">
         <form>
-          <input #todo type="text" class="form-control" placeholder="What's up?"
-             (keyup.enter)="addTodo(todo.value)"
+          <input #newTodo type="text" class="form-control" placeholder="What's up?"
+             (keyup.enter)="addTodo(newTodo.value)"
              [value]="todoValue">
         </form>
       </div>

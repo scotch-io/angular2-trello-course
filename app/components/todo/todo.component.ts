@@ -1,7 +1,7 @@
 import { Component, Input, ElementRef } from '@angular/core';
 import { List } from '../../shared/interfaces/List';
 import { Todo } from '../../shared/interfaces/Todo';
-import { ClickOutside } from 'ng2-click-outside'
+import { ClickOutside } from 'ng2-click-outside';
 
 @Component({
   moduleId: module.id,

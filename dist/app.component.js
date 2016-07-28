@@ -10,6 +10,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 var core_1 = require('@angular/core');
 var list_component_1 = require('./components/list/list.component');
+var list_add_component_1 = require('./components/list/list-add.component');
 var AppComponent = (function () {
     function AppComponent() {
         this.lists = [
@@ -29,12 +30,15 @@ var AppComponent = (function () {
             }
         ];
     }
+    AppComponent.prototype.listAdded = function (event) {
+        this.lists.push(event.list);
+    };
     AppComponent = __decorate([
         core_1.Component({
             moduleId: module.id,
             selector: 'my-app',
-            directives: [list_component_1.ListComponent],
-            template: "\n    <div class=\"row\">\n      <div class=\"col-sm-3\" *ngFor=\"let list of lists\">\n          <my-list [list]=\"list\"></my-list> \n      </div>\n\n      <div class=\"col-sm-3\">\n        <add-list [lists]=\"lists\"></add-list>\n      </div>\n    </div>\n  "
+            directives: [list_component_1.ListComponent, list_add_component_1.ListAddComponent],
+            template: "\n    <div class=\"row\">\n      <div class=\"col-sm-3\" *ngFor=\"let list of lists\">\n          <my-list [list]=\"list\"></my-list> \n      </div>\n\n      <div class=\"col-sm-3\">\n        <add-list (listsUpdate)=\"listUpdated($event)\"></add-list>\n      </div>\n    </div>\n  "
         }), 
         __metadata('design:paramtypes', [])
     ], AppComponent);
