@@ -1,11 +1,13 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, ElementRef } from '@angular/core';
 import { Todo } from '../shared/interfaces/Todo';
+import { ClickOutside } from 'ng2-click-outside'
 
 @Component({
   moduleId: module.id,
   selector: 'my-todo',
+  directives: [ClickOutside],
   template: `
-    <div class="todo-box">
+    <div class="todo-box" (clickOutside)="closeDropdown($event)">
       <input [(ngModel)]="todo.text"
         (keyup.enter)="saveTodo(todo.text)"
         (blur)="saveTodo(todo.text)">
@@ -83,6 +85,10 @@ export class TodoComponent {
 
   deleteTodo(todo: Todo) {
 
+  }
+
+  closeDropdown(event) {
+    this.dropdownVisible = false;
   }
 
 }

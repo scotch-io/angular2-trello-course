@@ -27,7 +27,8 @@ import { Todo } from '../shared/interfaces/Todo';
   `,
   styles: [`
     .list-box   {
-      cursor: pointer;
+      cursor: move;
+      cursor: grab;
       background: #F2F2F2;
       border-radius: 3px;
       padding: 10px;
