@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { ListComponent } from './list/list.component';
+import { ListComponent } from './components/list/list.component';
 import { List } from './shared/interfaces/List';
 import { Todo } from './shared/interfaces/Todo';
 
@@ -20,15 +20,15 @@ export class AppComponent {
     { 
       name: 'Next',
       todos: [
-        { text: 'do something', done: false },
-        { text: 'do other thing', done: false }
+        { id: 1, text: 'do something', done: false },
+        { id: 2, text: 'do other thing', done: false }
       ] 
     },
     {
       name: 'Icebox',
       todos: [
-        { text: 'clean the garage', done: false },
-        { text: 'clean everything', done: false }
+        { id: 1, text: 'clean the garage', done: false },
+        { id: 2, text: 'clean everything', done: false }
       ]
     }
   ];

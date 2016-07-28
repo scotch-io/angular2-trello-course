@@ -9,22 +9,22 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 var core_1 = require('@angular/core');
-var list_component_1 = require('./list/list.component');
+var list_component_1 = require('./components/list/list.component');
 var AppComponent = (function () {
     function AppComponent() {
         this.lists = [
             {
                 name: 'Next',
                 todos: [
-                    { text: 'do something', done: false },
-                    { text: 'do other thing', done: false }
+                    { id: 1, text: 'do something', done: false },
+                    { id: 2, text: 'do other thing', done: false }
                 ]
             },
             {
                 name: 'Icebox',
                 todos: [
-                    { text: 'clean the garage', done: false },
-                    { text: 'clean everything', done: false }
+                    { id: 1, text: 'clean the garage', done: false },
+                    { id: 2, text: 'clean everything', done: false }
                 ]
             }
         ];

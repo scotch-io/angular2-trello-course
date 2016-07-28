@@ -1,7 +1,7 @@
 import { Component, Input } from '@angular/core';
 import { TodoComponent } from '../todo/todo.component';
-import { List } from '../shared/interfaces/List';
-import { Todo } from '../shared/interfaces/Todo';
+import { List } from '../../shared/interfaces/List';
+import { Todo } from '../../shared/interfaces/Todo';
 
 @Component({
   moduleId: module.id,
@@ -14,7 +14,7 @@ import { Todo } from '../shared/interfaces/Todo';
       </div>
 
       <div *ngFor="let todo of list.todos">
-        <my-todo [todo]="todo"></my-todo>
+        <my-todo [list]="list" [todo]="todo"></my-todo>
       </div>
 
       <div class="new-todo-form">
@@ -58,10 +58,11 @@ export class ListComponent {
 
   addTodo(text: string) {
     this.list.todos.push({ text: text, done: false });
+    text = '';
   }
 
   deleteTodo(todo: Todo) {
-    
+   
   }
 
 }
