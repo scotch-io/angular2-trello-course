@@ -20,7 +20,8 @@ import { Todo } from '../../shared/interfaces/Todo';
       <div class="new-todo-form">
         <form>
           <input #todo type="text" class="form-control" placeholder="What's up?"
-             (keyup.enter)="addTodo(todo.value)">
+             (keyup.enter)="addTodo(todo.value)"
+             [value]="todoValue">
         </form>
       </div>
     </div>
@@ -47,6 +48,7 @@ import { Todo } from '../../shared/interfaces/Todo';
 })
 export class ListComponent {
   @Input() list: List;
+  todoValue: string = '';
 
   updateList(list: List) {
 
@@ -58,7 +60,7 @@ export class ListComponent {
 
   addTodo(text: string) {
     this.list.todos.push({ text: text, done: false });
-    text = '';
+    this.todoValue = '';
   }
 
   deleteTodo(todo: Todo) {

@@ -27,7 +27,7 @@ var TodoComponent = (function () {
     };
     __decorate([
         core_1.Input(), 
-        __metadata('design:type', Array)
+        __metadata('design:type', Object)
     ], TodoComponent.prototype, "list", void 0);
     __decorate([
         core_1.Input(), 

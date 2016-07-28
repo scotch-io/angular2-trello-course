@@ -9,9 +9,13 @@ import { Todo } from './shared/interfaces/Todo';
   directives: [ListComponent],
   template: `
     <div class="row">
-    <div class="col-sm-3" *ngFor="let list of lists">
-        <my-list [list]="list"></my-list> 
-    </div>
+      <div class="col-sm-3" *ngFor="let list of lists">
+          <my-list [list]="list"></my-list> 
+      </div>
+
+      <div class="col-sm-3">
+        <add-list [lists]="lists"></add-list>
+      </div>
     </div>
   `
 })
@@ -20,15 +24,15 @@ export class AppComponent {
     { 
       name: 'Next',
       todos: [
-        { id: 1, text: 'do something', done: false },
-        { id: 2, text: 'do other thing', done: false }
+        { text: 'do something', done: false },
+        { text: 'do other thing', done: false }
       ] 
     },
     {
       name: 'Icebox',
       todos: [
-        { id: 1, text: 'clean the garage', done: false },
-        { id: 2, text: 'clean everything', done: false }
+        { text: 'clean the garage', done: false },
+        { text: 'clean everything', done: false }
       ]
     }
   ];

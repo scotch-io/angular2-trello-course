@@ -72,7 +72,7 @@ import { ClickOutside } from 'ng2-click-outside'
   `]
 })
 export class TodoComponent {
-  @Input() list: List[];
+  @Input() list: List;
   @Input() todo: Todo;
   dropdownVisible: boolean = false;
 

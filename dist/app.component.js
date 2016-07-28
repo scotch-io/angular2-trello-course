@@ -16,15 +16,15 @@ var AppComponent = (function () {
             {
                 name: 'Next',
                 todos: [
-                    { id: 1, text: 'do something', done: false },
-                    { id: 2, text: 'do other thing', done: false }
+                    { text: 'do something', done: false },
+                    { text: 'do other thing', done: false }
                 ]
             },
             {
                 name: 'Icebox',
                 todos: [
-                    { id: 1, text: 'clean the garage', done: false },
-                    { id: 2, text: 'clean everything', done: false }
+                    { text: 'clean the garage', done: false },
+                    { text: 'clean everything', done: false }
                 ]
             }
         ];
@@ -34,7 +34,7 @@ var AppComponent = (function () {
             moduleId: module.id,
             selector: 'my-app',
             directives: [list_component_1.ListComponent],
-            template: "\n    <div class=\"row\">\n    <div class=\"col-sm-3\" *ngFor=\"let list of lists\">\n        <my-list [list]=\"list\"></my-list> \n    </div>\n    </div>\n  "
+            template: "\n    <div class=\"row\">\n      <div class=\"col-sm-3\" *ngFor=\"let list of lists\">\n          <my-list [list]=\"list\"></my-list> \n      </div>\n\n      <div class=\"col-sm-3\">\n        <add-list [lists]=\"lists\"></add-list>\n      </div>\n    </div>\n  "
         }), 
         __metadata('design:paramtypes', [])
     ], AppComponent);
