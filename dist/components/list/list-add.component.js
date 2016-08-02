@@ -19,14 +19,16 @@ var ListAddComponent = (function () {
         this.formVisible = true;
     };
     ListAddComponent.prototype.closeForm = function (event) {
-        console.log(event, 'something');
-        // this.formVisible = false;
+        console.log(event, 'closing form', 'something');
+        // if (this.formVisible)
+        //   this.formVisible = false;
     };
     ListAddComponent.prototype.addList = function (text) {
         var newList = {
             name: text,
             todos: []
         };
+        console.log(newList);
         this.listsUpdate.emit(newList);
     };
     __decorate([
@@ -37,7 +39,7 @@ var ListAddComponent = (function () {
         core_1.Component({
             selector: 'add-list',
             directives: [ng2_click_outside_1.ClickOutside],
-            template: "\n  <div (clickOutside)=\"closeForm($event)\">\n    <div class=\"add-list-placeholder\" *ngIf=\"!formVisible\">\n      <a href=\"#\" (click)=\"showForm()\">Add a list...</a>\n    </div>\n\n    <div class=\"add-list-form\" *ngIf=\"formVisible\">\n      <form>\n        <input #newList type=\"text\" class=\"form-control\">\n      </form>\n    </div>\n  </div>\n  ",
+            template: "\n  <div (clickOutside)=\"closeForm($event)\">\n    <div class=\"add-list-placeholder\" *ngIf=\"!formVisible\">\n      <a href=\"#\" (click)=\"showForm()\">Add a list...</a>\n    </div>\n\n    <div class=\"add-list-form\" *ngIf=\"formVisible\">\n      <form>\n        <input #listForm type=\"text\" class=\"form-control\" \n          (keyup.enter)=\"addList(listForm.value);listForm.value = ''\">\n      </form>\n    </div>\n  </div>\n  ",
             styles: ["\n    .add-list-placeholder   {\n      background: rgba(0, 0, 0, 0.5);\n      border-radius: 4px;\n      padding: 10px;\n      transition: 0.3s ease all;\n    }\n    .add-list-placeholder:hover {\n      cursor: pointer;\n      background: rgba(0, 0, 0, 0.65);\n    }\n    .add-list-placeholder:hover a {\n      text-decoration: none;\n    }\n    .add-list-placeholder a   {\n      color: rgba(255, 255, 255, 0.75);\n    }\n  "]
         }), 
         __metadata('design:paramtypes', [])

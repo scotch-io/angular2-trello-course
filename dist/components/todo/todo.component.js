@@ -12,18 +12,18 @@ var core_1 = require('@angular/core');
 var ng2_click_outside_1 = require('ng2-click-outside');
 var TodoComponent = (function () {
     function TodoComponent() {
+        this.todoDeleted = new core_1.EventEmitter();
         this.dropdownVisible = false;
     }
     TodoComponent.prototype.editTodo = function (todo) {
     };
     TodoComponent.prototype.saveTodo = function (todo) {
     };
-    TodoComponent.prototype.deleteTodo = function (list, todo) {
-        var index = this.list.todos.indexOf(todo);
-        this.list.todos.splice(index, 1);
-    };
     TodoComponent.prototype.closeDropdown = function (event) {
         this.dropdownVisible = false;
+    };
+    TodoComponent.prototype.deleteTodo = function (todo) {
+        this.todoDeleted.emit({ todo: todo });
     };
     __decorate([
         core_1.Input(), 
@@ -33,12 +33,16 @@ var TodoComponent = (function () {
         core_1.Input(), 
         __metadata('design:type', Object)
     ], TodoComponent.prototype, "todo", void 0);
+    __decorate([
+        core_1.Output(), 
+        __metadata('design:type', Object)
+    ], TodoComponent.prototype, "todoDeleted", void 0);
     TodoComponent = __decorate([
         core_1.Component({
             moduleId: module.id,
             selector: 'my-todo',
             directives: [ng2_click_outside_1.ClickOutside],
-            template: "\n    <div class=\"todo-box\" (clickOutside)=\"closeDropdown($event)\">\n      <input [(ngModel)]=\"todo.text\"\n        (keyup.enter)=\"saveTodo(todo.text)\"\n        (blur)=\"saveTodo(todo.text)\">\n\n      <a href=\"#\" class=\"todo-action-link\" \n        (click)=\"dropdownVisible = !dropdownVisible\">\n        ...\n      </a>\n  \n      <ul class=\"todo-dropdown\" *ngIf=\"dropdownVisible\">\n        <li><a href=\"#\">Something</a></li>\n        <li><a (click)=\"deleteTodo(list, todo)\">Delete</a></li>\n      </ul>\n    </div>\n  ",
+            template: "\n    <div class=\"todo-box\" (clickOutside)=\"closeDropdown($event)\">\n      <input [(ngModel)]=\"todo.text\"\n        (keyup.enter)=\"saveTodo(todo.text)\"\n        (blur)=\"saveTodo(todo.text)\">\n\n      <a href=\"#\" class=\"todo-action-link\" \n        (click)=\"dropdownVisible = !dropdownVisible\">\n        ...\n      </a>\n  \n      <ul class=\"todo-dropdown\" *ngIf=\"dropdownVisible\">\n        <li><a href=\"#\">Something</a></li>\n        <li><a (click)=\"deleteTodo(todo)\">Delete</a></li>\n      </ul>\n    </div>\n  ",
             styles: ["\n    .todo-box   {\n      background: #FFF;\n      box-shadow: 1px 1px 0 rgba(0, 0, 0, 0.1);\n      padding: 5px 10px;\n      margin-bottom: 8px;\n      position: relative;\n    }    \n    .todo-action-link   {\n      position: absolute;\n      right: 5px;\n      top: 5px;\n      background: rgba(0, 0, 0, 0.05);\n      border-radius: 4px;\n      padding-left: 5px;\n      padding-right: 5px;\n      color: #BBB;\n    }\n    input   {\n      border: none;\n      background: none;\n    }\n    input:active,\n    input:focus   {\n      outline: none;\n    }\n    .todo-dropdown   {\n      background: rgba(0, 0, 0, 0.75);\n      border-radius: 4px;\n      position: absolute;\n      left: 88%;\n      top: 88%;\n      margin: 0;\n      padding: 5px 10px;\n      z-index: 9999;\n    }\n    .todo-dropdown li   {\n      list-style: none; \n    }\n    .todo-dropdown a     {\n      color: #FFF;\n      padding: 3px 0;\n      margin-bottom: 5px;\n      font-size: 12px;\n    }\n  "]
         }), 
         __metadata('design:paramtypes', [])

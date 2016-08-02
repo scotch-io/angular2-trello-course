@@ -14,7 +14,8 @@ import { ClickOutside } from 'ng2-click-outside';
 
     <div class="add-list-form" *ngIf="formVisible">
       <form>
-        <input #newList type="text" class="form-control">
+        <input #listForm type="text" class="form-control" 
+          (keyup.enter)="addList(listForm.value);listForm.value = ''">
       </form>
     </div>
   </div>
@@ -47,9 +48,9 @@ export class ListAddComponent {
   }
 
   closeForm(event) {
-
-    console.log(event, 'something');
-    // this.formVisible = false;
+    console.log(event, 'closing form', 'something');
+    // if (this.formVisible)
+    //   this.formVisible = false;
   }
 
   addList(text: string) {
@@ -57,6 +58,7 @@ export class ListAddComponent {
       name: text,
       todos: []
     };
+    console.log(newList);
     this.listsUpdate.emit(newList);
   }
 }

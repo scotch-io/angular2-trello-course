@@ -1,4 +1,4 @@
-import { Component, Input, ElementRef } from '@angular/core';
+import { Component, Input, ElementRef, Output, EventEmitter } from '@angular/core';
 import { List } from '../../shared/interfaces/List';
 import { Todo } from '../../shared/interfaces/Todo';
 import { ClickOutside } from 'ng2-click-outside';
@@ -20,7 +20,7 @@ import { ClickOutside } from 'ng2-click-outside';
   
       <ul class="todo-dropdown" *ngIf="dropdownVisible">
         <li><a href="#">Something</a></li>
-        <li><a (click)="deleteTodo(list, todo)">Delete</a></li>
+        <li><a (click)="deleteTodo(todo)">Delete</a></li>
       </ul>
     </div>
   `,
@@ -74,6 +74,7 @@ import { ClickOutside } from 'ng2-click-outside';
 export class TodoComponent {
   @Input() list: List;
   @Input() todo: Todo;
+  @Output() todoDeleted = new EventEmitter();
   dropdownVisible: boolean = false;
 
   editTodo(todo: Todo) {
@@ -84,13 +85,12 @@ export class TodoComponent {
 
   }
 
-  deleteTodo(list: List[], todo: Todo) {
-    const index = this.list.todos.indexOf(todo);
-    this.list.todos.splice(index, 1);
-  }
-
   closeDropdown(event) {
     this.dropdownVisible = false;
+  }
+
+  deleteTodo(todo) {
+    this.todoDeleted.emit({ todo: todo });
   }
 
 }

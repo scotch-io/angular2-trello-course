@@ -2,26 +2,29 @@ import { Component, Input } from '@angular/core';
 import { TodoComponent } from '../todo/todo.component';
 import { List } from '../../shared/interfaces/List';
 import { Todo } from '../../shared/interfaces/Todo';
+import { Dragula, DragulaService } from 'ng2-dragula/ng2-dragula';
 
 @Component({
   moduleId: module.id,
   selector: 'my-list',
-  directives: [TodoComponent],
+  directives: [TodoComponent, Dragula],
+  viewProviders: [DragulaService],
   template: `
     <div class="list-box">
       <div class="list-box-title">
         {{ list.name }} 
       </div>
 
-      <div *ngFor="let todo of list.todos">
-        <my-todo [todo]="todo"></my-todo>
+      <div *ngIf="list.todos">
+      <div *ngFor="let todo of list.todos" [dragula]='"first-bag"'>
+        <my-todo [todo]="todo" (todoDeleted)="handleTodoDelete($event)"></my-todo>
+      </div>
       </div>
 
       <div class="new-todo-form">
         <form>
-          <input #newTodo type="text" class="form-control" placeholder="What's up?"
-             (keyup.enter)="addTodo(newTodo.value)"
-             [value]="todoValue">
+          <input #todoForm type="text" class="form-control" placeholder="What's up?"
+             (keyup.enter)="addTodo(todoForm.value);todoForm.value=''">
         </form>
       </div>
     </div>
@@ -48,7 +51,6 @@ import { Todo } from '../../shared/interfaces/Todo';
 })
 export class ListComponent {
   @Input() list: List;
-  todoValue: string = '';
 
   updateList(list: List) {
 
@@ -60,11 +62,11 @@ export class ListComponent {
 
   addTodo(text: string) {
     this.list.todos.push({ text: text, done: false });
-    this.todoValue = '';
   }
 
-  deleteTodo(todo: Todo) {
-   
+  handleTodoDelete(event) {
+    const index = this.list.todos.indexOf(event.todo);
+    this.list.todos.splice(index, 1);
   }
 
 }

@@ -10,9 +10,9 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 var core_1 = require('@angular/core');
 var todo_component_1 = require('../todo/todo.component');
+var ng2_dragula_1 = require('ng2-dragula/ng2-dragula');
 var ListComponent = (function () {
     function ListComponent() {
-        this.todoValue = '';
     }
     ListComponent.prototype.updateList = function (list) {
     };
@@ -20,9 +20,10 @@ var ListComponent = (function () {
     };
     ListComponent.prototype.addTodo = function (text) {
         this.list.todos.push({ text: text, done: false });
-        this.todoValue = '';
     };
-    ListComponent.prototype.deleteTodo = function (todo) {
+    ListComponent.prototype.handleTodoDelete = function (event) {
+        var index = this.list.todos.indexOf(event.todo);
+        this.list.todos.splice(index, 1);
     };
     __decorate([
         core_1.Input(), 
@@ -32,8 +33,9 @@ var ListComponent = (function () {
         core_1.Component({
             moduleId: module.id,
             selector: 'my-list',
-            directives: [todo_component_1.TodoComponent],
-            template: "\n    <div class=\"list-box\">\n      <div class=\"list-box-title\">\n        {{ list.name }} \n      </div>\n\n      <div *ngFor=\"let todo of list.todos\">\n        <my-todo [todo]=\"todo\"></my-todo>\n      </div>\n\n      <div class=\"new-todo-form\">\n        <form>\n          <input #newTodo type=\"text\" class=\"form-control\" placeholder=\"What's up?\"\n             (keyup.enter)=\"addTodo(newTodo.value)\"\n             [value]=\"todoValue\">\n        </form>\n      </div>\n    </div>\n  ",
+            directives: [todo_component_1.TodoComponent, ng2_dragula_1.Dragula],
+            viewProviders: [ng2_dragula_1.DragulaService],
+            template: "\n    <div class=\"list-box\">\n      <div class=\"list-box-title\">\n        {{ list.name }} \n      </div>\n\n      <div *ngIf=\"list.todos\">\n      <div *ngFor=\"let todo of list.todos\" [dragula]='\"first-bag\"'>\n        <my-todo [todo]=\"todo\" (todoDeleted)=\"handleTodoDelete($event)\"></my-todo>\n      </div>\n      </div>\n\n      <div class=\"new-todo-form\">\n        <form>\n          <input #todoForm type=\"text\" class=\"form-control\" placeholder=\"What's up?\"\n             (keyup.enter)=\"addTodo(todoForm.value);todoForm.value=''\">\n        </form>\n      </div>\n    </div>\n  ",
             styles: ["\n    .list-box   {\n      cursor: move;\n      cursor: grab;\n      background: #F2F2F2;\n      border-radius: 3px;\n      padding: 10px;\n      box-shadow: 2px 2px 0 rgba(0, 0, 0, 0.25);\n      max-width: 300px;\n    }\n    .list-box-title   {\n      margin-bottom: 8px;\n    }\n    .new-todo-form input {\n      font-size: 16px;\n      padding-left: 10px;\n      padding-right: 10px;\n    }\n  "]
         }), 
         __metadata('design:paramtypes', [])
